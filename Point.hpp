@@ -4,6 +4,7 @@ class Point
 {
 public:
     Point(unsigned int pointId);
+    Point();
     unsigned int getPointId();
 
 private:
