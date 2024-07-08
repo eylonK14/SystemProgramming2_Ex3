@@ -12,9 +12,9 @@ public:
         return std::to_string(_q) + "," + std::to_string(_r);
     }
 
-    int q() const { return _q; }
-    int r() const { return _r; }
-    int s() const { return -_q - _r; }
+    int getQ() const { return _q; }
+    int getR() const { return _r; }
+    int getS() const { return -_q - _r; }
 
 private:
     int _q, _r;

@@ -29,9 +29,9 @@ Board::Board()
 
     for (auto hexagon : _hexagons)
     {
-        Edge edgeNE = Edge(hexagon.second.q(), hexagon.second.r(), "NE");
-        Edge edgeNW = Edge(hexagon.second.q(), hexagon.second.r(), "NW");
-        Edge edgeW = Edge(hexagon.second.q(), hexagon.second.r(), "W");
+        Edge edgeNE = Edge(hexagon.second.getQ(), hexagon.second.getR(), "NE");
+        Edge edgeNW = Edge(hexagon.second.getQ(), hexagon.second.getR(), "NW");
+        Edge edgeW = Edge(hexagon.second.getQ(), hexagon.second.getR(), "W");
 
         _edgeMap.addValue(idx, edgeNE.toString(), edgeNE); // NE
         ++idx;
@@ -40,8 +40,8 @@ Board::Board()
         _edgeMap.addValue(idx, edgeW.toString(), edgeW); // W
         ++idx;
 
-        Vertex vertexN = Vertex(hexagon.second.q(), hexagon.second.r(), 'N'); // N
-        Vertex vertexS = Vertex(hexagon.second.q(), hexagon.second.r(), 'S'); // S
+        Vertex vertexN = Vertex(hexagon.second.getQ(), hexagon.second.getR(), 'N'); // N
+        Vertex vertexS = Vertex(hexagon.second.getQ(), hexagon.second.getR(), 'S'); // S
 
         _vertexMap.addValue(secIdx, vertexN.toString(), vertexN);
         secIdx++;
