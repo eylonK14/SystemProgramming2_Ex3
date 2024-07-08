@@ -1,6 +1,7 @@
+// @author eylony1403@gmail.com
+
 #include "Hexagon.hpp"
 
-Hexagon::Hexagon(std::vector<Point&> points, std::vector<Line&> lines, unsigned int hexId, unsigned int hexNum, TerrainType terrainType)
-    : _points(points), _lines(lines), _hexId(hexId), _hexNum(hexNum), _terrainType(terrainType)
+Hexagon::Hexagon(int _q, int _r) : _q(_q), _r(_r)
 {
 }
