@@ -10,23 +10,48 @@ template <typename T>
 class MultiMap
 {
 public:
-    MultiMap() {}
-
-    T &getValueByIndex(int key) const
+    T &getValueByIndex(int key)
     {
-        std::string keyStr = _translator[key];
-        return _map.at(keyStr);
+        size_t i = static_cast<size_t>(key);
+        return _map.at(_translator[i]);
     }
 
-    T &getValueByKey(std::string key) const
+    T &getValueByKey(std::string key)
     {
         return _map.at(key);
     }
 
     void addValue(int key, std::string keyStr, T value)
     {
-        _translator[key] = keyStr;
-        _map[keyStr] = value;
+        size_t i = static_cast<size_t>(key);
+        _map.insert(std::make_pair(keyStr, value));
+        _translator.push_back(keyStr);
+    }
+
+    bool containsKey(std::string key)
+    {
+        return _map.find(key) != _map.end();
+    }
+
+    bool containsIndex(int key)
+    {
+        size_t i = static_cast<size_t>(key);
+        return i < _translator.size();
+    }
+
+    int getIndexByKey(std::string key)
+    {
+        std::vector<std::string>::iterator itr = std::find(v.begin(), v.end(), key);
+        if (itr != v.cend())
+        {
+            return std::distance(v.begin(), itr);
+        }
+        return -1;
+    }
+
+    std::string getKeyByIndex(int key)
+    {
+        return _translator[key];
     }
 
 private:

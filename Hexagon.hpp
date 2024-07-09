@@ -3,6 +3,16 @@
 #pragma once
 #include <string>
 
+enum Terrain
+{
+    DESERT,
+    PASTURE,
+    FOREST,
+    HILLS,
+    MOUNTAINS,
+    FIELDS
+};
+
 class Hexagon
 {
 public:

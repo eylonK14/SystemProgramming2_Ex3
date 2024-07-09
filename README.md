@@ -17,6 +17,12 @@ make test # will create the test exe file
 ./test # execute the test file
 ```
 
+## References
+
+- [Hexagonal Grids](https://www.redblobgames.com/grids/hexagons/)
+- [Implementation of Hex Grid](https://www.redblobgames.com/grids/hexagons/implementation.html)
+- [Grid Parts and Relationships](https://www.redblobgames.com/grids/parts/#more)
+
 ## Author
 
 - [Eylon Yaakov Katan](https://github.com/eylonk14)

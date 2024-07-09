@@ -37,8 +37,13 @@ private:
     MultiMap<Vertex> _vertexMap;
     MultiMap<Edge> _edgeMap;
 
+    bool lengthLaw(int);
+    bool oneRoadLeading(int, int);
+    bool checkLegalRoad(int, int);
+
 public:
     Board();
     void print();
-    bool Board::lengthLaw(int i);
+    void addSettelment(int, int, int);
+    void addRoad(int, int);
 };

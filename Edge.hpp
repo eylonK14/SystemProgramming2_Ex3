@@ -9,6 +9,14 @@ class Edge
 public:
     Edge(int q, int r, std::string s);
     std::string toString();
+    int getOwnerID();
+    void setOwnerID(int ownerID);
+    bool getHasRoad();
+    void setHasRoad(bool hasRoad);
+
+    int getQ();
+    int getR();
+    std::string getS();
 
 private:
     int _q, _r, _ownerID;
