@@ -41,10 +41,10 @@ public:
 
     int getIndexByKey(std::string key)
     {
-        std::vector<std::string>::iterator itr = std::find(v.begin(), v.end(), key);
-        if (itr != v.cend())
+        std::vector<std::string>::iterator itr = std::find(_translator.begin(), _translator.end(), key);
+        if (itr != _translator.cend())
         {
-            return std::distance(v.begin(), itr);
+            return std::distance(_translator.begin(), itr);
         }
         return -1;
     }

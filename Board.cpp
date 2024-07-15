@@ -12,11 +12,21 @@ Board::Board()
             int s = -q - r;
             if (s >= -2 && s <= 2)
             {
-                _hexagons.insert(std::make_pair(idx, Hexagon(r, q)));
+                if (idx == 10)
+                {
+                    _hexagons.insert(std::make_pair(idx, Hexagon(r, q, DESERT, true)));
+                }
+                else
+                {
+                    _hexagons.insert(std::make_pair(idx, Hexagon(r, q, randomTerrain())));
+                }
                 idx++;
             }
         }
     }
+
+    randomizeHexagonNumbers();
+    _hexagons.at(10).setRollNumber(7);
 
     std::cout << "Number of hexagons: " << _hexagons.size() << std::endl;
 
@@ -224,5 +234,40 @@ void Board::addRoad(int e, int id)
     {
         _edgeMap.getValueByIndex(e).setOwnerID(id);
         _edgeMap.getValueByIndex(e).setHasRoad(true);
+    }
+}
+
+void Board::moveRobber(int newId)
+{
+    _hexagons.at(_robberLocation).setContainsRobber(false);
+    _hexagons.at(newId).setContainsRobber(true);
+    _robberLocation = newId;
+}
+
+void Board::print()
+{
+    for (auto i = _hexagons.begin(); i != _hexagons.end(); i++)
+    {
+        std::cout << i->first << ": " << i->second.toString() << std::endl;
+    }
+}
+
+void Board::randomizeHexagonNumbers()
+{
+    std::vector<int> numbers = {2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 11, 12};
+
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(seed));
+
+    size_t numberIndex = 0;
+    for (auto &hexagonPair : _hexagons)
+    {
+        if (!(hexagonPair.second.getTerrain() == DESERT))
+        {
+            if (numberIndex < numbers.size())
+            {
+                hexagonPair.second.setRollNumber(numbers[numberIndex++]);
+            }
+        }
     }
 }

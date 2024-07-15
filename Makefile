@@ -4,7 +4,7 @@ CXXFLAGS=-std=c++2a -Werror -Wsign-conversion -g
 
 # Assuming Demo.cpp and Test.cpp are your main .cpp files
 SOURCES=
-DEMO_SOURCES=Demo.cpp Board.cpp Hexagon.cpp Vertex.cpp Edge.cpp
+DEMO_SOURCES=Demo.cpp Board.cpp Hexagon.cpp Vertex.cpp Edge.cpp Terrain.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 DEMO_OBJECTS=$(DEMO_SOURCES:.cpp=.o)
 

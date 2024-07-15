@@ -29,6 +29,11 @@ char Vertex::getS()
     return _s;
 }
 
+int Vertex::getOwnerID()
+{
+    return _ownerID;
+}
+
 void Vertex::setOwnerID(int ownerID)
 {
     _ownerID = ownerID;

@@ -14,6 +14,16 @@ int Edge::getOwnerID()
     return _ownerID;
 }
 
+int Edge::getQ()
+{
+    return _q;
+}
+
+int Edge::getR()
+{
+    return _r;
+}
+
 std::string Edge::getS()
 {
     return _s;
