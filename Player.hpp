@@ -7,6 +7,7 @@
 
 #include "Resource.hpp"
 #include "cards/DevelopmentCard.hpp"
+#include "cards/DevelopmentCardFactory.cpp"
 #include "board/Board.hpp"
 #include "board/Vertex.hpp"
 
@@ -24,6 +25,8 @@ public:
     bool removeResourceCard(Resource);
 
     void Robber(Board &board);
+
+    void purchaseDevelopmentCard();
 
 private:
     int _id, _victoryPoints;

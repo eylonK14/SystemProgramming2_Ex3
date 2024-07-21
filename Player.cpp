@@ -128,3 +128,20 @@ void Player::Robber(Board &board)
     Terrain terrain = board.preformRobbery();
     this->_resourceCards[getResourceFromTerrain(terrain)]++;
 }
+
+void Player::purchaseDevelopmentCard()
+{
+    if (_resourceCards[Resource::ORE] < 1 || _resourceCards[Resource::WOOL] < 1 || _resourceCards[Resource::GRAIN] < 1)
+    {
+        std::cout << "Insufficient resources!" << std::endl;
+        return;
+    }
+
+    _resourceCards[Resource::ORE]--;
+    _resourceCards[Resource::WOOL]--;
+    _resourceCards[Resource::GRAIN]--;
+
+    _developmentCards.push_back(getCard());
+}
+
+
