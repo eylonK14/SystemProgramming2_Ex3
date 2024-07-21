@@ -219,22 +219,42 @@ bool Board::checkLegalRoad(int edge, int id)
     }
 }
 
-void Board::addSettelment(int v, int id, int settementType)
+bool Board::addSettelment(int v, int id, int settlementType)
 {
-    if (lengthLaw(v) && oneRoadLeading(v, id))
+    if (settlementType == SETTELMENT)
     {
-        _vertexMap.getValueByIndex(v).setOwnerID(id);
-        _vertexMap.getValueByIndex(v).setHasOwner(settementType);
+        if (lengthLaw(v) && oneRoadLeading(v, id))
+        {
+            _vertexMap.getValueByIndex(v).setOwnerID(id);
+            _vertexMap.getValueByIndex(v).setHasOwner(SETTELMENT);
+
+            return true;
+        }
     }
+    if (settlementType == CITY)
+    {
+        if (_vertexMap.getValueByIndex(v).getOwnerID() == id && _vertexMap.getValueByIndex(v).getHasOwner() == SETTELMENT)
+        {
+            _vertexMap.getValueByIndex(v).setHasOwner(CITY);
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
-void Board::addRoad(int e, int id)
+bool Board::addRoad(int e, int id)
 {
     if (checkLegalRoad(e, id))
     {
         _edgeMap.getValueByIndex(e).setOwnerID(id);
         _edgeMap.getValueByIndex(e).setHasRoad(true);
+
+        return true;
     }
+
+    return false;
 }
 
 void Board::moveRobber(int newId)

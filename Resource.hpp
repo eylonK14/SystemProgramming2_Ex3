@@ -6,13 +6,14 @@
 
 enum Resource
 {
-    BRICK,
-    LUMBER,
-    WOOL,
-    GRAIN,
-    ORE
+    BRICK,  // Represents brick resource
+    LUMBER, // Represents lumber resource
+    WOOL,   // Represents wool resource
+    GRAIN,  // Represents grain resource
+    ORE     // Represents ore resource
 };
 
+// Converts a string to a Resource enum value
 Resource resource_from_string(const std::string &str)
 {
     if (str == "Brick")
@@ -29,6 +30,7 @@ Resource resource_from_string(const std::string &str)
         throw std::invalid_argument("Invalid resource string: " + str);
 }
 
+// Converts a Resource enum value to a string
 std::string resource_to_string(Resource resource)
 {
     switch (resource)
@@ -48,6 +50,7 @@ std::string resource_to_string(Resource resource)
     }
 }
 
+// Retrieves the resource associated with a given terrain type
 Resource getResourceFromTerrain(Terrain terrain)
 {
     switch (terrain)
@@ -69,6 +72,7 @@ Resource getResourceFromTerrain(Terrain terrain)
     }
 }
 
+// Retrieves the index of a resource in a collection
 size_t getIndexFromResource(Resource resource)
 {
     switch (resource)

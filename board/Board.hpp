@@ -46,14 +46,14 @@ public:
      * @param y The y-coordinate of the settlement.
      * @param playerId The ID of the player who owns the settlement.
      */
-    void addSettelment(int x, int y, int playerId);
+    bool addSettelment(int x, int y, int playerId);
 
     /**
      * @brief Adds a road to the board.
      * @param x The x-coordinate of the road.
      * @param y The y-coordinate of the road.
      */
-    void addRoad(int x, int y);
+    bool addRoad(int x, int y);
 
     /**
      * @brief Moves the robber to a new location on the board.

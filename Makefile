@@ -8,7 +8,7 @@ DEMO_SOURCES=Demo.cpp board/Board.cpp board/Hexagon.cpp board/Vertex.cpp board/E
 OBJECTS=$(SOURCES:.cpp=.o)
 DEMO_OBJECTS=$(DEMO_SOURCES:.cpp=.o)
 
-tree: demo
+catan: demo
 	./$^
 
 all: demo test

@@ -2,19 +2,25 @@
 
 #pragma once
 
+#include <iostream>
+#include <random>
+
 #include "Resource.hpp"
 #include "cards/DevelopmentCard.hpp"
+#include "board/Board.hpp"
+#include "board/Vertex.hpp"
 
 class Player
 {
 public:
-    Player();
+    Player(int);
     ~Player();
 
     int rollDice();
+    void build(Board &board);
 
 private:
     int _id, _victoryPoints;
-    Resource _resourceCards[5];
+    int _resourceCards[5];
     std::vector<DevelopmentCard> _developmentCards;
 };
