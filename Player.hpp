@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Resource.hpp"
-#include "DevelopmentCard.hpp"
+#include "cards/DevelopmentCard.hpp"
 
 class Player
 {
@@ -12,7 +12,6 @@ public:
     ~Player();
 
     int rollDice();
-
 
 private:
     int _id, _victoryPoints;
