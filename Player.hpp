@@ -18,18 +18,15 @@ public:
     ~Player();
 
     int getId();
-
     int rollDice();
     void build(Board &board);
-
     bool removeResourceCard(Resource);
-
     void Robber(Board &board);
-
     void purchaseDevelopmentCard();
+    void playDevelopmentCard(Board &board);
 
 private:
-    int _id, _victoryPoints;
+    int _id, _victoryPoints, _knightCount;
     int _resourceCards[5];
     std::vector<DevelopmentCard> _developmentCards;
 };

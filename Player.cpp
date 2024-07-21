@@ -144,4 +144,39 @@ void Player::purchaseDevelopmentCard()
     _developmentCards.push_back(getCard());
 }
 
+void Player::playDevelopmentCard(Board &board)
+{
+    if (_developmentCards.size() == 0)
+    {
+        std::cout << "No development cards to play!" << std::endl;
+        return;
+    }
 
+    DevelopmentCard card = _developmentCards.front();
+    _developmentCards.erase(_developmentCards.begin());
+
+    if (card.getDescription() == "Victory Point Card")
+    {
+        this->_victoryPoints++;
+    }
+    else
+    {
+        int choice = 0;
+        std::cout << "Knight card played!" << std::endl;
+        std::cout << "Where do you want to place the robber? ";
+        std::cin >> choice;
+
+        if (choice == 10)
+        {
+            std::cout << "Invalid choice!" << std::endl;
+        }
+        else
+        {
+            board.moveRobber(choice);
+            this->_knightCount++;
+
+            if (this->_knightCount == 3)
+                _victoryPoints += 2;
+        }
+    }
+}

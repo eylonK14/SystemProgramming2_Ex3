@@ -298,6 +298,9 @@ void Board::randomizeHexagonNumbers()
 
 Terrain Board::preformRobbery()
 {
+    if (_robberLocation == 10)
+        throw std::invalid_argument("Invalid argument");
+
     Hexagon robberHex = _hexagons.at(_robberLocation);
 
     std::string first = std::to_string(robberHex.getQ()) + ":" + std::to_string(robberHex.getR()) + ":" + 'N';
