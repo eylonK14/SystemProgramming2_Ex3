@@ -172,9 +172,9 @@ bool Board::checkLegalRoad(int edge, int id)
         std::string second = std::to_string(e.getQ()) + ":" + std::to_string(e.getR()) + ":" + 'N';
 
         if (_vertexMap.containsKey(first))
-            firstC = _vertexMap.getValueByKey(first).getOwnerID() == id;
+            firstC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
         if (_vertexMap.containsKey(second))
-            secondC = _vertexMap.getValueByKey(first).getOwnerID() == id;
+            secondC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
 
         thirdC = oneRoadLeading(_vertexMap.getIndexByKey(first), id);
         fourthC = oneRoadLeading(_vertexMap.getIndexByKey(second), id);
@@ -190,9 +190,9 @@ bool Board::checkLegalRoad(int edge, int id)
         std::string second = std::to_string(e.getQ()) + ":" + std::to_string(e.getR()) + ":" + 'N';
 
         if (_vertexMap.containsKey(first))
-            firstC = _vertexMap.getValueByKey(first).getOwnerID() == id;
+            firstC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
         if (_vertexMap.containsKey(second))
-            secondC = _vertexMap.getValueByKey(first).getOwnerID() == id;
+            secondC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
 
         thirdC = oneRoadLeading(_vertexMap.getIndexByKey(first), id);
         fourthC = oneRoadLeading(_vertexMap.getIndexByKey(second), id);
@@ -208,9 +208,9 @@ bool Board::checkLegalRoad(int edge, int id)
         std::string second = std::to_string(e.getQ() - 1) + ":" + std::to_string(e.getR() + 1) + ":" + 'N';
 
         if (_vertexMap.containsKey(first))
-            firstC = _vertexMap.getValueByKey(first).getOwnerID() == id;
+            firstC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
         if (_vertexMap.containsKey(second))
-            secondC = _vertexMap.getValueByKey(first).getOwnerID() == id;
+            secondC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
 
         thirdC = oneRoadLeading(_vertexMap.getIndexByKey(first), id);
         fourthC = oneRoadLeading(_vertexMap.getIndexByKey(second), id);
@@ -219,13 +219,13 @@ bool Board::checkLegalRoad(int edge, int id)
     }
 }
 
-bool Board::addSettelment(int v, int id, int settlementType)
+bool Board::addSettelment(int v, int id, int settlementType, Player *player)
 {
     if (settlementType == SETTELMENT)
     {
         if (lengthLaw(v) && oneRoadLeading(v, id))
         {
-            _vertexMap.getValueByIndex(v).setOwnerID(id);
+            _vertexMap.getValueByIndex(v).setPlayer(player);
             _vertexMap.getValueByIndex(v).setHasOwner(SETTELMENT);
 
             return true;
@@ -233,7 +233,7 @@ bool Board::addSettelment(int v, int id, int settlementType)
     }
     if (settlementType == CITY)
     {
-        if (_vertexMap.getValueByIndex(v).getOwnerID() == id && _vertexMap.getValueByIndex(v).getHasOwner() == SETTELMENT)
+        if (_vertexMap.getValueByIndex(v).getPlayer()->getId() == id && _vertexMap.getValueByIndex(v).getHasOwner() == SETTELMENT)
         {
             _vertexMap.getValueByIndex(v).setHasOwner(CITY);
 

@@ -46,7 +46,7 @@ public:
      * @param y The y-coordinate of the settlement.
      * @param playerId The ID of the player who owns the settlement.
      */
-    bool addSettelment(int x, int y, int playerId);
+    bool addSettelment(int x, int y, int playerId, Player *player);
 
     /**
      * @brief Adds a road to the board.
@@ -94,4 +94,6 @@ private:
      * @brief Randomizes the numbers on the hexagons.
      */
     void randomizeHexagonNumbers();
+
+    // TODO: Preform Robbery
 };

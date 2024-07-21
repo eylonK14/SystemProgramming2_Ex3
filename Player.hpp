@@ -16,6 +16,8 @@ public:
     Player(int);
     ~Player();
 
+    int getId();
+
     int rollDice();
     void build(Board &board);
 

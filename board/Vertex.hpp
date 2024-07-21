@@ -8,6 +8,8 @@
 
 #include <string>
 
+#include "Player.hpp"
+
 /**
  * @class Vertex
  * @brief Represents a vertex in a graph.
@@ -50,25 +52,11 @@ public:
     char getS();
 
     /**
-     * @brief Gets the owner ID of the vertex.
-     *
-     * @return The owner ID of the vertex.
-     */
-    int getOwnerID();
-
-    /**
      * @brief Gets whether the vertex has an owner.
      *
      * @return 1 if the vertex has an owner, 0 otherwise.
      */
     int getHasOwner();
-
-    /**
-     * @brief Sets the owner ID of the vertex.
-     *
-     * @param ownerID The owner ID to set.
-     */
-    void setOwnerID(int ownerID);
 
     /**
      * @brief Sets whether the vertex has an owner.
@@ -84,7 +72,12 @@ public:
      */
     std::string toString();
 
+    Player *getPlayer();
+
+    void setPlayer(Player *player);
+
 private:
-    int _q, _r, _ownerID, _hasOwner;
+    int _q, _r, _hasOwner;
     char _s;
+    Player *_player;
 };

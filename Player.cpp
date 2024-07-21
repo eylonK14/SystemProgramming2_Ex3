@@ -6,6 +6,11 @@ Player::Player(int id) : _id(id), _victoryPoints(0)
 {
 }
 
+int Player::getId()
+{
+    return _id;
+}
+
 int Player::rollDice()
 {
     int result = 0;
@@ -31,6 +36,11 @@ void Player::build(Board &board)
     switch (choice)
     {
     case 1:
+        if (_resourceCards[Resource::BRICK] < 1 || _resourceCards[Resource::LUMBER] < 1)
+        {
+            std::cout << "Insufficient resources!" << std::endl;
+            break;
+        }
         int roadLocation = 0;
         std::cout << "Enter road location: ";
         std::cin >> roadLocation;
@@ -47,11 +57,17 @@ void Player::build(Board &board)
         }
         break;
     case 2:
+        if (_resourceCards[Resource::BRICK] < 3 || _resourceCards[Resource::LUMBER] < 2 || _resourceCards[Resource::WOOL] < 1 || _resourceCards[Resource::GRAIN] < 1)
+        {
+            std::cout << "Insufficient resources!" << std::endl;
+            break;
+        }
+
         int settlementLocation = 0;
         std::cout << "Enter settlement location: ";
         std::cin >> settlementLocation;
 
-        if (board.addSettelment(settlementLocation, _id, SETTELMENT))
+        if (board.addSettelment(settlementLocation, _id, SETTELMENT, this))
         {
             std::cout << "Road added successfully!" << std::endl;
             _resourceCards[Resource::BRICK]--;
@@ -65,11 +81,16 @@ void Player::build(Board &board)
         }
         break;
     case 3:
+        if (_resourceCards[Resource::ORE] < 3 || _resourceCards[Resource::GRAIN] < 2)
+        {
+            std::cout << "Insufficient resources!" << std::endl;
+            break;
+        }
         int settlementLocation = 0;
         std::cout << "Enter settlement location: ";
         std::cin >> settlementLocation;
 
-        if (board.addSettelment(settlementLocation, _id, CITY))
+        if (board.addSettelment(settlementLocation, _id, CITY, this))
         {
             std::cout << "Road added successfully!" << std::endl;
             _resourceCards[Resource::ORE] -= 3;
@@ -86,3 +107,5 @@ void Player::build(Board &board)
         break;
     }
 }
+
+//TODO: Preform Robbery
