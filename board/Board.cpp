@@ -259,6 +259,10 @@ bool Board::addRoad(int e, int id)
 
 void Board::moveRobber(int newId)
 {
+    if (newId < 0 || newId > 19)
+    {
+        throw std::invalid_argument("Invalid argument");
+    }
     _hexagons.at(_robberLocation).setContainsRobber(false);
     _hexagons.at(newId).setContainsRobber(true);
     _robberLocation = newId;
@@ -287,6 +291,32 @@ void Board::randomizeHexagonNumbers()
             if (numberIndex < numbers.size())
             {
                 hexagonPair.second.setRollNumber(numbers[numberIndex++]);
+            }
+        }
+    }
+}
+
+Terrain Board::preformRobbery()
+{
+    Hexagon robberHex = _hexagons.at(_robberLocation);
+
+    std::string first = std::to_string(robberHex.getQ()) + ":" + std::to_string(robberHex.getR()) + ":" + 'N';
+    std::string second = std::to_string(robberHex.getQ() + 1) + ":" + std::to_string(robberHex.getR() - 1) + ":" + 'S';
+    std::string third = std::to_string(robberHex.getQ()) + ":" + std::to_string(robberHex.getR() - 1) + ":" + 'S';
+    std::string fourth = std::to_string(robberHex.getQ() - 1) + ":" + std::to_string(robberHex.getR() + 1) + ":" + 'N';
+    std::string fifth = std::to_string(robberHex.getQ()) + ":" + std::to_string(robberHex.getR() + 1) + ":" + 'N';
+    std::string sixth = std::to_string(robberHex.getQ()) + ":" + std::to_string(robberHex.getR()) + ":" + 'S';
+
+    std::vector<std::string> vertices = {first, second, third, fourth, fifth, sixth};
+
+    for (auto i = vertices.begin(); i != vertices.end(); i++)
+    {
+        if (_vertexMap.containsKey(*i))
+        {
+            if (_vertexMap.getValueByKey(*i).getHasOwner() == CITY || _vertexMap.getValueByKey(*i).getHasOwner() == SETTELMENT)
+            {
+                if (_vertexMap.getValueByKey(*i).getPlayer()->removeResourceCard(getResourceFromTerrain(robberHex.getTerrain())))
+                    return robberHex.getTerrain();
             }
         }
     }

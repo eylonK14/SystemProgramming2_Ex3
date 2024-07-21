@@ -108,4 +108,23 @@ void Player::build(Board &board)
     }
 }
 
-//TODO: Preform Robbery
+bool Player::removeResourceCard(Resource resource)
+{
+    if (_resourceCards[resource] > 0)
+    {
+        _resourceCards[resource]--;
+        return true;
+    }
+    return false;
+}
+
+void Player::Robber(Board &board)
+{
+    int newLocation = 0;
+    std::cout << "Enter new robber location: ";
+    std::cin >> newLocation;
+
+    board.moveRobber(newLocation);
+    Terrain terrain = board.preformRobbery();
+    this->_resourceCards[getResourceFromTerrain(terrain)]++;
+}

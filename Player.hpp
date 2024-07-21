@@ -21,6 +21,10 @@ public:
     int rollDice();
     void build(Board &board);
 
+    bool removeResourceCard(Resource);
+
+    void Robber(Board &board);
+
 private:
     int _id, _victoryPoints;
     int _resourceCards[5];

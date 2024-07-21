@@ -61,6 +61,13 @@ public:
      */
     void moveRobber(int newId);
 
+    /**
+     * Performs a robbery on the terrain.
+     *
+     * @return The result of the robbery.
+     */
+    Terrain preformRobbery();
+
 private:
     int _robberLocation;              /**< The current location of the robber on the board. */
     std::map<int, Hexagon> _hexagons; /**< The hexagons on the board. */
@@ -94,6 +101,4 @@ private:
      * @brief Randomizes the numbers on the hexagons.
      */
     void randomizeHexagonNumbers();
-
-    // TODO: Preform Robbery
 };
