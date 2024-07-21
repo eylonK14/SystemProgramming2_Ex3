@@ -155,13 +155,6 @@ bool Board::oneRoadLeading(int v, int id)
     }
 }
 
-/**
- * Checks if a road is legal for a given edge and player ID.
- *
- * @param edge The index of the edge to check.
- * @param id The ID of the player.
- * @return True if the road is legal for the player, false otherwise.
- */
 bool Board::checkLegalRoad(int edge, int id)
 {
     if (!_edgeMap.containsIndex(edge))

@@ -4,7 +4,7 @@ CXXFLAGS=-std=c++2a -Werror -Wsign-conversion -g
 
 # Assuming Demo.cpp and Test.cpp are your main .cpp files
 SOURCES=
-DEMO_SOURCES=Demo.cpp Board.cpp Hexagon.cpp Vertex.cpp Edge.cpp Terrain.cpp
+DEMO_SOURCES=Demo.cpp board/Board.cpp board/Hexagon.cpp board/Vertex.cpp board/Edge.cpp board/Terrain.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 DEMO_OBJECTS=$(DEMO_SOURCES:.cpp=.o)
 
@@ -33,4 +33,4 @@ valgrind: demo test
 .PHONY: clean all
 
 clean:
-	rm -f *.o demo test
+	rm -f board/*.o *.o demo test

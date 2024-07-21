@@ -1,6 +1,6 @@
 //
 
-#include "Board.hpp"
+#include "board/Board.hpp"
 
 int main(int argc, char *argv[])
 {

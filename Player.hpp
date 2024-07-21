@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Resource.hpp"
+#include "DevelopmentCard.hpp"
 
 class Player
 {
@@ -10,8 +11,11 @@ public:
     Player();
     ~Player();
 
+    int rollDice();
+
+
 private:
     int _id, _victoryPoints;
     Resource _resourceCards[5];
-    // TODO: Add more fields as needed
+    std::vector<DevelopmentCard> _developmentCards;
 };
