@@ -17,14 +17,4 @@
  *
  * @return A randomly generated DevelopmentCard.
  */
-DevelopmentCard getCard()
-{
-    std::random_device rd;  // a seed source for the random number engine
-    std::mt19937 gen(rd()); // mersenne_twister_engine seeded with rd()
-    std::uniform_int_distribution<> distrib(1, 2);
-
-    if (distrib(gen) == 1)
-        return KnightCard();
-    else
-        return VictoryPointCard();
-}
+DevelopmentCard getCard();

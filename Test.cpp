@@ -186,11 +186,11 @@ TEST_CASE("Test Board::addRoad")
     Board board;
 
     // Test adding a road at (0, 0)
-    CHECK(board.addRoad(0, 0) == true);
+    CHECK(board.addRoad(23, 2) == true);
 
     // Test adding a road at (1, 1)
-    CHECK(board.addRoad(1, 1) == true);
+    CHECK(board.addRoad(47, 1) == true);
 
     // Test adding a road at (0, 0) again (should fail because there is already a road)
-    CHECK(board.addRoad(0, 0) == false);
+    CHECK(board.addRoad(23, 1) == false);
 }

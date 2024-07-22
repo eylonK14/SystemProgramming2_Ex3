@@ -10,12 +10,6 @@ typedef struct _TradeMaker
     int _get[5];
 } TradeMaker;
 
-void addToGive(TradeMaker &tradeMaker, std::string str, int amt)
-{
-    tradeMaker._give[resource_from_string(str)] = amt;
-}
+void addToGive(TradeMaker &tradeMaker, std::string str, int amt);
 
-void addToGet(TradeMaker &tradeMaker, std::string str, int amt)
-{
-    tradeMaker._get[resource_from_string(str)] = amt;
-}
+void addToGet(TradeMaker &tradeMaker, std::string str, int amt);

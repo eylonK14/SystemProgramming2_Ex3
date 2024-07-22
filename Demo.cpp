@@ -1,13 +1,10 @@
 //
 
-#include "board/Board.hpp"
+#include "Catan.hpp"
 
 int main(int argc, char *argv[])
 {
-    // TODO: MAKE ONE ROUND OF PLAY
-    // ADD TESTS AND DOCS
-    Board board;
-
-    board.print(); // Print the board
+    Catan game;
+    game.playTurn();
     return 0;
 }

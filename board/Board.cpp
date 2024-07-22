@@ -159,6 +159,7 @@ bool Board::checkLegalRoad(int edge, int id)
 {
     if (!_edgeMap.containsIndex(edge))
     {
+        std::cout << "Edge not found" << std::endl;
         return false;
     }
 
@@ -174,7 +175,7 @@ bool Board::checkLegalRoad(int edge, int id)
         if (_vertexMap.containsKey(first))
             firstC = _vertexMap.getValueByKey(first).getOwnerID() == id;
         if (_vertexMap.containsKey(second))
-            secondC = _vertexMap.getValueByKey(first).getOwnerID() == id;
+            secondC = _vertexMap.getValueByKey(second).getOwnerID() == id;
 
         thirdC = oneRoadLeading(_vertexMap.getIndexByKey(first), id);
         fourthC = oneRoadLeading(_vertexMap.getIndexByKey(second), id);
@@ -192,7 +193,7 @@ bool Board::checkLegalRoad(int edge, int id)
         if (_vertexMap.containsKey(first))
             firstC = _vertexMap.getValueByKey(first).getOwnerID() == id;
         if (_vertexMap.containsKey(second))
-            secondC = _vertexMap.getValueByKey(first).getOwnerID() == id;
+            secondC = _vertexMap.getValueByKey(second).getOwnerID() == id;
 
         thirdC = oneRoadLeading(_vertexMap.getIndexByKey(first), id);
         fourthC = oneRoadLeading(_vertexMap.getIndexByKey(second), id);
@@ -210,7 +211,7 @@ bool Board::checkLegalRoad(int edge, int id)
         if (_vertexMap.containsKey(first))
             firstC = _vertexMap.getValueByKey(first).getOwnerID() == id;
         if (_vertexMap.containsKey(second))
-            secondC = _vertexMap.getValueByKey(first).getOwnerID() == id;
+            secondC = _vertexMap.getValueByKey(second).getOwnerID() == id;
 
         thirdC = oneRoadLeading(_vertexMap.getIndexByKey(first), id);
         fourthC = oneRoadLeading(_vertexMap.getIndexByKey(second), id);
