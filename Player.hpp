@@ -19,7 +19,7 @@ public:
 
     int getId();
     int rollDice();
-    void build(Board &board);
+    void build(Board &board, bool firstRound = false);
     bool removeResourceCard(Resource);
     void Robber(Board &board);
     void purchaseDevelopmentCard();

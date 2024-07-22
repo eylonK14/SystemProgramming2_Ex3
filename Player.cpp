@@ -24,7 +24,7 @@ int Player::rollDice()
     return result;
 }
 
-void Player::build(Board &board)
+void Player::build(Board &board, bool firstRound = false)
 {
     std::cout << "What type of building would you like to build?" << std::endl
               << "1. Road" << std::endl
@@ -48,8 +48,11 @@ void Player::build(Board &board)
         if (board.addRoad(_id, roadLocation))
         {
             std::cout << "Road added successfully!" << std::endl;
-            _resourceCards[Resource::BRICK]--;
-            _resourceCards[Resource::LUMBER]--;
+            if (!firstRound)
+            {
+                _resourceCards[Resource::BRICK]--;
+                _resourceCards[Resource::LUMBER]--;
+            }
         }
         else
         {
@@ -69,11 +72,14 @@ void Player::build(Board &board)
 
         if (board.addSettelment(settlementLocation, _id, SETTELMENT, this))
         {
-            std::cout << "Road added successfully!" << std::endl;
-            _resourceCards[Resource::BRICK]--;
-            _resourceCards[Resource::LUMBER]--;
-            _resourceCards[Resource::WOOL]--;
-            _resourceCards[Resource::GRAIN]--;
+            std::cout << "Settlement added successfully!" << std::endl;
+            if (!firstRound)
+            {
+                _resourceCards[Resource::BRICK]--;
+                _resourceCards[Resource::LUMBER]--;
+                _resourceCards[Resource::WOOL]--;
+                _resourceCards[Resource::GRAIN]--;
+            }
         }
         else
         {
@@ -92,9 +98,12 @@ void Player::build(Board &board)
 
         if (board.addSettelment(settlementLocation, _id, CITY, this))
         {
-            std::cout << "Road added successfully!" << std::endl;
-            _resourceCards[Resource::ORE] -= 3;
-            _resourceCards[Resource::GRAIN] -= 2;
+            std::cout << "City added successfully!" << std::endl;
+            if (!firstRound)
+            {
+                _resourceCards[Resource::ORE] -= 3;
+                _resourceCards[Resource::GRAIN] -= 2;
+            }
         }
         else
         {
