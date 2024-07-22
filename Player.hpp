@@ -88,6 +88,8 @@ public:
 
     void trade(Player &player1, Player &player2);
 
+    int getVictoryPoints();
+
 private:
     int _id;                                        // The ID of the player.
     int _victoryPoints;                             // The number of victory points the player has.

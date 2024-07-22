@@ -208,37 +208,86 @@ void Player::playDevelopmentCard(Board &board)
 
 void Player::trade(Player &player1, Player &player2)
 {
+    TradeMaker t;
     int choice = 0;
     std::cout << "Which player do you want to trade with?" << std::endl
               << "1. Player 1" << std::endl
               << "2. Player 2" << std::endl;
     std::cin >> choice;
 
+    std::string giveR;
+    std::string wantR;
+
     int give = 0;
     int want = 0;
-    std::cout << "What resource do you want to give (Resource Amount)? ";
-    std::cin >> give;
-    std::cout << "What resource do you want to get? ";
-    std::cin >> want;
+    std::cout << "What resource do you want to give (Resource Amount - (-1 to stop))? ";
+    while (giveR != "-1")
+    {
+        std::cin >> giveR;
+        if (giveR == "-1")
+            break;
+        std::cin >> give;
+
+        addToGive(t, giveR, give);
+    }
+
+    std::cin >> giveR >> give;
+    std::cout << "What resource do you want to get (Resource Amount - (-1 to stop))? ";
+    while (wantR != "-1")
+    {
+        std::cin >> wantR;
+        if (wantR == "-1")
+            break;
+        std::cin >> want;
+
+        addToGive(t, wantR, want);
+    }
 
     if (choice == 1)
     {
-        if (player1.removeResourceCard(static_cast<Resource>(give)) && player2.removeResourceCard(static_cast<Resource>(want)))
+        for (int i = 0; i < 5; i++)
         {
-            _resourceCards[give]++;
-            _resourceCards[want]++;
+            if (t._give[i] > player1._resourceCards[i])
+            {
+                std::cout << "Invalid trade!" << std::endl;
+                return;
+            }
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            _resourceCards[i] -= t._give[i];
+            _resourceCards[i] += t._get[i];
+            player1._resourceCards[i] += t._give[i];
+            player1._resourceCards[i] -= t._get[i];
         }
     }
     else if (choice == 2)
     {
-        if (player2.removeResourceCard(static_cast<Resource>(give)) && player1.removeResourceCard(static_cast<Resource>(want)))
+        for (int i = 0; i < 5; i++)
         {
-            _resourceCards[give]++;
-            _resourceCards[want]++;
+            if (t._give[i] > player2._resourceCards[i])
+            {
+                std::cout << "Invalid trade!" << std::endl;
+                return;
+            }
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            _resourceCards[i] -= t._give[i];
+            _resourceCards[i] += t._get[i];
+            player2._resourceCards[i] += t._give[i];
+            player2._resourceCards[i] -= t._get[i];
         }
     }
     else
     {
         std::cout << "Invalid choice!" << std::endl;
     }
+}
+
+int Player::getVictoryPoints()
+{
+    return _victoryPoints;
 }
