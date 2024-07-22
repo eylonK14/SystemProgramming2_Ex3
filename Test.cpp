@@ -16,7 +16,7 @@ TEST_CASE("Vertex Construction")
     CHECK(v.getR() == 2);
     CHECK(v.getS() == 'A');
     CHECK(v.getHasOwner() == 0);
-    CHECK(v.getPlayer() == nullptr);
+    CHECK(v.getOwnerID() == -1);
 }
 
 TEST_CASE("Vertex Owner")
@@ -24,9 +24,9 @@ TEST_CASE("Vertex Owner")
     Vertex v(1, 2, 'A');
     Player p(1);
     v.setHasOwner(1);
-    v.setPlayer(&p);
+    v.setOwnerID(1);
     CHECK(v.getHasOwner() == 0);
-    CHECK(v.getPlayer() == &p);
+    CHECK(v.getOwnerID() == 1);
 }
 
 TEST_CASE("Vertex String Representation")
@@ -170,18 +170,15 @@ TEST_CASE("Edge toString")
 TEST_CASE("Test Board::addSettelment")
 {
     Board board;
-    Player player(1);
-    Player player2(2);
-    Player player3(3);
 
     // Test adding a settlement at (0, 0) for player 1
-    CHECK(board.addSettelment(0, 0, 1, &player) == true);
+    CHECK(board.addSettelment(0, 0, 1) == true);
 
     // Test adding a settlement at (1, 1) for player 2
-    CHECK(board.addSettelment(1, 1, 2, &player3) == true);
+    CHECK(board.addSettelment(1, 1, 2) == true);
 
     // Test adding a settlement at (0, 0) for player 3 (should fail because there is already a settlement)
-    CHECK(board.addSettelment(0, 0, 3, &player3) == false);
+    CHECK(board.addSettelment(0, 0, 3) == false);
 }
 
 TEST_CASE("Test Board::addRoad")
@@ -196,14 +193,4 @@ TEST_CASE("Test Board::addRoad")
 
     // Test adding a road at (0, 0) again (should fail because there is already a road)
     CHECK(board.addRoad(0, 0) == false);
-}
-
-TEST_CASE("Test Board::preformRobbery")
-{
-    Board board;
-
-    // Test performing a robbery
-    Terrain result = board.preformRobbery();
-    CHECK(result == Terrain::FOREST || result == Terrain::HILLS || result == Terrain::FIELDS ||
-          result == Terrain::MOUNTAINS || result == Terrain::PASTURE || result == Terrain::DESERT);
 }

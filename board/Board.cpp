@@ -172,9 +172,9 @@ bool Board::checkLegalRoad(int edge, int id)
         std::string second = std::to_string(e.getQ()) + ":" + std::to_string(e.getR()) + ":" + 'N';
 
         if (_vertexMap.containsKey(first))
-            firstC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
+            firstC = _vertexMap.getValueByKey(first).getOwnerID() == id;
         if (_vertexMap.containsKey(second))
-            secondC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
+            secondC = _vertexMap.getValueByKey(first).getOwnerID() == id;
 
         thirdC = oneRoadLeading(_vertexMap.getIndexByKey(first), id);
         fourthC = oneRoadLeading(_vertexMap.getIndexByKey(second), id);
@@ -190,9 +190,9 @@ bool Board::checkLegalRoad(int edge, int id)
         std::string second = std::to_string(e.getQ()) + ":" + std::to_string(e.getR()) + ":" + 'N';
 
         if (_vertexMap.containsKey(first))
-            firstC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
+            firstC = _vertexMap.getValueByKey(first).getOwnerID() == id;
         if (_vertexMap.containsKey(second))
-            secondC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
+            secondC = _vertexMap.getValueByKey(first).getOwnerID() == id;
 
         thirdC = oneRoadLeading(_vertexMap.getIndexByKey(first), id);
         fourthC = oneRoadLeading(_vertexMap.getIndexByKey(second), id);
@@ -208,9 +208,9 @@ bool Board::checkLegalRoad(int edge, int id)
         std::string second = std::to_string(e.getQ() - 1) + ":" + std::to_string(e.getR() + 1) + ":" + 'N';
 
         if (_vertexMap.containsKey(first))
-            firstC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
+            firstC = _vertexMap.getValueByKey(first).getOwnerID() == id;
         if (_vertexMap.containsKey(second))
-            secondC = _vertexMap.getValueByKey(first).getPlayer()->getId() == id;
+            secondC = _vertexMap.getValueByKey(first).getOwnerID() == id;
 
         thirdC = oneRoadLeading(_vertexMap.getIndexByKey(first), id);
         fourthC = oneRoadLeading(_vertexMap.getIndexByKey(second), id);
@@ -219,13 +219,13 @@ bool Board::checkLegalRoad(int edge, int id)
     }
 }
 
-bool Board::addSettelment(int v, int id, int settlementType, Player *player)
+bool Board::addSettelment(int v, int id, int settlementType)
 {
     if (settlementType == SETTELMENT)
     {
         if (lengthLaw(v) && oneRoadLeading(v, id))
         {
-            _vertexMap.getValueByIndex(v).setPlayer(player);
+            _vertexMap.getValueByIndex(v).setOwnerID(id);
             _vertexMap.getValueByIndex(v).setHasOwner(SETTELMENT);
 
             return true;
@@ -233,7 +233,7 @@ bool Board::addSettelment(int v, int id, int settlementType, Player *player)
     }
     if (settlementType == CITY)
     {
-        if (_vertexMap.getValueByIndex(v).getPlayer()->getId() == id && _vertexMap.getValueByIndex(v).getHasOwner() == SETTELMENT)
+        if (_vertexMap.getValueByIndex(v).getOwnerID() == id && _vertexMap.getValueByIndex(v).getHasOwner() == SETTELMENT)
         {
             _vertexMap.getValueByIndex(v).setHasOwner(CITY);
 
@@ -296,14 +296,40 @@ void Board::randomizeHexagonNumbers()
     }
 }
 
-Resource Board::yieldResources(int diceRoll)
+std::vector<Hexagon> Board::yieldResources(int diceRoll)
 {
-    // TODO: return hexagons that are not desert
-    for (auto hexagon : _hexagons)
+    std::vector<Hexagon> hexagons = {};
+    if (diceRoll != 7)
     {
-        if (hexagon.second.getRollNumber() == diceRoll && hexagon.second.getContainsRobber() == false)
+        for (auto hexagon : _hexagons)
         {
-            return getResourceFromTerrain(hexagon.second.getTerrain());
+            if (hexagon.second.getRollNumber() == diceRoll && hexagon.second.getContainsRobber() == false)
+            {
+                hexagons.push_back(hexagon.second);
+            }
         }
     }
+
+    return hexagons;
+}
+
+std::vector<Vertex> Board::getVerticesFromHexagon(Hexagon hexagon)
+{
+    std::vector<Vertex> vertices = {};
+
+    std::string first = std::to_string(hexagon.getQ()) + ":" + std::to_string(hexagon.getR()) + ":" + 'N';
+    std::string second = std::to_string(hexagon.getQ() + 1) + ":" + std::to_string(hexagon.getR() - 1) + ":" + 'S';
+    std::string third = std::to_string(hexagon.getQ()) + ":" + std::to_string(hexagon.getR() - 1) + ":" + 'S';
+    std::string fourth = std::to_string(hexagon.getQ() - 1) + ":" + std::to_string(hexagon.getR() + 1) + ":" + 'N';
+    std::string fifth = std::to_string(hexagon.getQ()) + ":" + std::to_string(hexagon.getR() + 1) + ":" + 'N';
+    std::string sixth = std::to_string(hexagon.getQ()) + ":" + std::to_string(hexagon.getR()) + ":" + 'S';
+
+    vertices.push_back(_vertexMap.getValueByKey(first));
+    vertices.push_back(_vertexMap.getValueByKey(second));
+    vertices.push_back(_vertexMap.getValueByKey(third));
+    vertices.push_back(_vertexMap.getValueByKey(fourth));
+    vertices.push_back(_vertexMap.getValueByKey(fifth));
+    vertices.push_back(_vertexMap.getValueByKey(sixth));
+
+    return vertices;
 }

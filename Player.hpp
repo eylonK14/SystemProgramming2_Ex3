@@ -5,11 +5,13 @@
 #include <iostream>
 #include <random>
 
-#include "Resource.hpp"
+// #include "Resource.hpp"
 #include "cards/DevelopmentCard.hpp"
-#include "cards/DevelopmentCardFactory.cpp"
+#include "cards/DevelopmentCardFactory.hpp"
 #include "board/Board.hpp"
 #include "board/Vertex.hpp"
+#include "TradeMaker.hpp"
+#include "Resource.hpp"
 
 /**
  * @class Player
@@ -30,11 +32,6 @@ public:
     Player(int id);
 
     /**
-     * @brief Destroys the Player object.
-     */
-    ~Player();
-
-    /**
      * @brief Gets the ID of the player.
      *
      * @return The ID of the player.
@@ -46,7 +43,7 @@ public:
      *
      * @return The result of the dice roll.
      */
-    int rollDice(); //TODO: add two players and board
+    void rollDice(Board &board, Player &player1, Player &player2);
 
     /**
      * @brief Builds a structure on the game board.
@@ -83,11 +80,13 @@ public:
      */
     void playDevelopmentCard(Board &board);
 
-    //TODO: add trade
-    //trade - p2, p3
-    //i make want + give
-    //try from 2
-    //try from 3
+    // TODO: add trade
+    // trade - p2, p3
+    // i make want + give
+    // try from 2
+    // try from 3
+
+    void trade(Player &player1, Player &player2);
 
 private:
     int _id;                                        // The ID of the player.

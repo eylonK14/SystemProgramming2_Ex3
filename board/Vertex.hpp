@@ -8,8 +8,6 @@
 
 #include <string>
 
-#include "../Player.hpp"
-
 /**
  * @class Vertex
  * @brief Represents a vertex in a graph.
@@ -72,24 +70,13 @@ public:
      */
     std::string toString();
 
-    /**
-     * @brief Gets the player who owns the vertex.
-     *
-     * @return A pointer to the player who owns the vertex.
-     */
-    Player *getPlayer();
+    void setOwnerID(int ownerID);
 
-    /**
-     * @brief Sets the player who owns the vertex.
-     *
-     * @param player A pointer to the player who owns the vertex.
-     */
-    void setPlayer(Player *player);
+    int getOwnerID();
 
 private:
-    int _q, _r, _hasOwner; // The q-coordinate, r-coordinate, and ownership status of the vertex.
-    char _s;               // The symbol associated with the vertex.
-    Player *_player;       // A pointer to the player who owns the vertex.
+    int _q, _r, _hasOwner, _ownerID; // The q-coordinate, r-coordinate, and ownership status of the vertex.
+    char _s;                         // The symbol associated with the vertex.
 
     // TODO: change player to id
 };

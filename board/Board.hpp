@@ -19,7 +19,6 @@
 #include "Hexagon.hpp"
 #include "MultiMap.hpp"
 #include "Terrain.hpp"
-#include "../Player.hpp"
 
 #define SIZE 2
 
@@ -47,7 +46,7 @@ public:
      * @param y The y-coordinate of the settlement.
      * @param playerId The ID of the player who owns the settlement.
      */
-    bool addSettelment(int x, int y, int playerId, Player *player);
+    bool addSettelment(int x, int y, int playerId);
 
     /**
      * @brief Adds a road to the board.
@@ -62,7 +61,9 @@ public:
      */
     void moveRobber(int newId);
 
-    Resource yieldResources(int diceRoll);
+    std::vector<Hexagon> yieldResources(int diceRoll);
+
+    std::vector<Vertex> getVerticesFromHexagon(Hexagon hexagon);
 
 private:
     int _robberLocation;              /**< The current location of the robber on the board. */

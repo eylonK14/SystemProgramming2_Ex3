@@ -1,6 +1,6 @@
 #include "Vertex.hpp"
 
-Vertex::Vertex(int q, int r, char s) : _q(q), _r(r), _s(s), _hasOwner(NONE)
+Vertex::Vertex(int q, int r, char s) : _q(q), _r(r), _s(s), _hasOwner(NONE), _ownerID(-1)
 {
 }
 
@@ -34,12 +34,12 @@ void Vertex::setHasOwner(int hasOwner)
     _hasOwner = hasOwner;
 }
 
-Player *Vertex::getPlayer()
+void Vertex::setOwnerID(int ownerID)
 {
-    return _player;
+    _ownerID = ownerID;
 }
 
-void Vertex::setPlayer(Player *player)
+int Vertex::getOwnerID()
 {
-    _player = player;
+    return _ownerID;
 }

@@ -1,5 +1,7 @@
 // Derived class for Resource Cards
 
+#pragma once
+
 #include "board/Terrain.hpp"
 #include <iostream>
 #include <stdexcept>

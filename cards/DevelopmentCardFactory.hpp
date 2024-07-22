@@ -1,5 +1,7 @@
 // @author: eylony1403@gmail.com
 
+#pragma once
+
 #include <iostream>
 #include <random>
 

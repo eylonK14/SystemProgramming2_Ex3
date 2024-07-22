@@ -11,7 +11,7 @@ int Player::getId()
     return _id;
 }
 
-int Player::rollDice()
+void Player::rollDice(Board &board, Player &player1, Player &player2)
 {
     int result = 0;
     std::random_device rd;  // a seed source for the random number engine
@@ -21,22 +21,37 @@ int Player::rollDice()
     result = distrib(gen);
     result += distrib(gen);
 
-    return result;
+    std::vector<Hexagon> hexagons = board.yieldResources(result);
 
-    //TODO
-
-    //Board -> hex with result
-    //for hex with result
-    // for v in hex if v.owner id == 3 or 2 add 1 to resource cards
+    for (auto hexagon : hexagons)
+    {
+        for (auto v : board.getVerticesFromHexagon(hexagon))
+        {
+            if (v.getOwnerID() == player1.getId())
+            {
+                player1._resourceCards[getIndexFromResource(getResourceFromTerrain(hexagon.getTerrain()))]++;
+            }
+            if (v.getOwnerID() == player2.getId())
+            {
+                player2._resourceCards[getIndexFromResource(getResourceFromTerrain(hexagon.getTerrain()))]++;
+            }
+            if (v.getOwnerID() == _id)
+            {
+                _resourceCards[getIndexFromResource(getResourceFromTerrain(hexagon.getTerrain()))]++;
+            }
+        }
+    }
 }
 
-void Player::build(Board &board, bool firstRound = false)
+void Player::build(Board &board, bool firstRound)
 {
     std::cout << "What type of building would you like to build?" << std::endl
               << "1. Road" << std::endl
               << "2. Settlement" << std::endl
               << "3. City" << std::endl;
     int choice = 0;
+    int settlementLocation = 0;
+    int roadLocation = 0;
     std::cin >> choice;
 
     switch (choice)
@@ -47,7 +62,6 @@ void Player::build(Board &board, bool firstRound = false)
             std::cout << "Insufficient resources!" << std::endl;
             break;
         }
-        int roadLocation = 0;
         std::cout << "Enter road location: ";
         std::cin >> roadLocation;
 
@@ -71,12 +85,10 @@ void Player::build(Board &board, bool firstRound = false)
             std::cout << "Insufficient resources!" << std::endl;
             break;
         }
-
-        int settlementLocation = 0;
         std::cout << "Enter settlement location: ";
         std::cin >> settlementLocation;
 
-        if (board.addSettelment(settlementLocation, _id, SETTELMENT, this))
+        if (board.addSettelment(settlementLocation, _id, SETTELMENT))
         {
             std::cout << "Settlement added successfully!" << std::endl;
             if (!firstRound)
@@ -87,6 +99,7 @@ void Player::build(Board &board, bool firstRound = false)
                 _resourceCards[Resource::GRAIN]--;
             }
         }
+        // TODO: Add settlement location to vertex
         else
         {
             std::cout << "Invalid road location!" << std::endl;
@@ -98,11 +111,10 @@ void Player::build(Board &board, bool firstRound = false)
             std::cout << "Insufficient resources!" << std::endl;
             break;
         }
-        int settlementLocation = 0;
         std::cout << "Enter settlement location: ";
         std::cin >> settlementLocation;
 
-        if (board.addSettelment(settlementLocation, _id, CITY, this))
+        if (board.addSettelment(settlementLocation, _id, CITY))
         {
             std::cout << "City added successfully!" << std::endl;
             if (!firstRound)
@@ -191,5 +203,42 @@ void Player::playDevelopmentCard(Board &board)
             if (this->_knightCount == 3)
                 _victoryPoints += 2;
         }
+    }
+}
+
+void Player::trade(Player &player1, Player &player2)
+{
+    int choice = 0;
+    std::cout << "Which player do you want to trade with?" << std::endl
+              << "1. Player 1" << std::endl
+              << "2. Player 2" << std::endl;
+    std::cin >> choice;
+
+    int give = 0;
+    int want = 0;
+    std::cout << "What resource do you want to give (Resource Amount)? ";
+    std::cin >> give;
+    std::cout << "What resource do you want to get? ";
+    std::cin >> want;
+
+    if (choice == 1)
+    {
+        if (player1.removeResourceCard(static_cast<Resource>(give)) && player2.removeResourceCard(static_cast<Resource>(want)))
+        {
+            _resourceCards[give]++;
+            _resourceCards[want]++;
+        }
+    }
+    else if (choice == 2)
+    {
+        if (player2.removeResourceCard(static_cast<Resource>(give)) && player1.removeResourceCard(static_cast<Resource>(want)))
+        {
+            _resourceCards[give]++;
+            _resourceCards[want]++;
+        }
+    }
+    else
+    {
+        std::cout << "Invalid choice!" << std::endl;
     }
 }
