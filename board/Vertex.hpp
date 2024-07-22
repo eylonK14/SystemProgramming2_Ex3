@@ -90,4 +90,6 @@ private:
     int _q, _r, _hasOwner; // The q-coordinate, r-coordinate, and ownership status of the vertex.
     char _s;               // The symbol associated with the vertex.
     Player *_player;       // A pointer to the player who owns the vertex.
+
+    // TODO: change player to id
 };

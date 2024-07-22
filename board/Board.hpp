@@ -62,12 +62,7 @@ public:
      */
     void moveRobber(int newId);
 
-    /**
-     * Performs a robbery on the terrain.
-     *
-     * @return The result of the robbery.
-     */
-    Terrain preformRobbery();
+    Resource yieldResources(int diceRoll);
 
 private:
     int _robberLocation;              /**< The current location of the robber on the board. */

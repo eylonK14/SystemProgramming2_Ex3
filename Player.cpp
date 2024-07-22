@@ -22,6 +22,12 @@ int Player::rollDice()
     result += distrib(gen);
 
     return result;
+
+    //TODO
+
+    //Board -> hex with result
+    //for hex with result
+    // for v in hex if v.owner id == 3 or 2 add 1 to resource cards
 }
 
 void Player::build(Board &board, bool firstRound = false)
@@ -134,8 +140,6 @@ void Player::Robber(Board &board)
     std::cin >> newLocation;
 
     board.moveRobber(newLocation);
-    Terrain terrain = board.preformRobbery();
-    this->_resourceCards[getResourceFromTerrain(terrain)]++;
 }
 
 void Player::purchaseDevelopmentCard()

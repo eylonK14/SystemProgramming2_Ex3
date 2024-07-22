@@ -296,31 +296,14 @@ void Board::randomizeHexagonNumbers()
     }
 }
 
-Terrain Board::preformRobbery()
+Resource Board::yieldResources(int diceRoll)
 {
-    if (_robberLocation == 10)
-        throw std::invalid_argument("Invalid argument");
-
-    Hexagon robberHex = _hexagons.at(_robberLocation);
-
-    std::string first = std::to_string(robberHex.getQ()) + ":" + std::to_string(robberHex.getR()) + ":" + 'N';
-    std::string second = std::to_string(robberHex.getQ() + 1) + ":" + std::to_string(robberHex.getR() - 1) + ":" + 'S';
-    std::string third = std::to_string(robberHex.getQ()) + ":" + std::to_string(robberHex.getR() - 1) + ":" + 'S';
-    std::string fourth = std::to_string(robberHex.getQ() - 1) + ":" + std::to_string(robberHex.getR() + 1) + ":" + 'N';
-    std::string fifth = std::to_string(robberHex.getQ()) + ":" + std::to_string(robberHex.getR() + 1) + ":" + 'N';
-    std::string sixth = std::to_string(robberHex.getQ()) + ":" + std::to_string(robberHex.getR()) + ":" + 'S';
-
-    std::vector<std::string> vertices = {first, second, third, fourth, fifth, sixth};
-
-    for (auto i = vertices.begin(); i != vertices.end(); i++)
+    // TODO: return hexagons that are not desert
+    for (auto hexagon : _hexagons)
     {
-        if (_vertexMap.containsKey(*i))
+        if (hexagon.second.getRollNumber() == diceRoll && hexagon.second.getContainsRobber() == false)
         {
-            if (_vertexMap.getValueByKey(*i).getHasOwner() == CITY || _vertexMap.getValueByKey(*i).getHasOwner() == SETTELMENT)
-            {
-                if (_vertexMap.getValueByKey(*i).getPlayer()->removeResourceCard(getResourceFromTerrain(robberHex.getTerrain())))
-                    return robberHex.getTerrain();
-            }
+            return getResourceFromTerrain(hexagon.second.getTerrain());
         }
     }
 }

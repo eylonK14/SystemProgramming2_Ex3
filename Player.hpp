@@ -46,7 +46,7 @@ public:
      *
      * @return The result of the dice roll.
      */
-    int rollDice();
+    int rollDice(); //TODO: add two players and board
 
     /**
      * @brief Builds a structure on the game board.
@@ -82,6 +82,12 @@ public:
      * @param board The game board.
      */
     void playDevelopmentCard(Board &board);
+
+    //TODO: add trade
+    //trade - p2, p3
+    //i make want + give
+    //try from 2
+    //try from 3
 
 private:
     int _id;                                        // The ID of the player.
