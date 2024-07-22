@@ -3,8 +3,8 @@ CXXFLAGS=-std=c++2a -Werror -Wsign-conversion -g
 
 
 # Assuming Demo.cpp and Test.cpp are your main .cpp files
-SOURCES=
-DEMO_SOURCES=Demo.cpp board/Board.cpp board/Hexagon.cpp board/Vertex.cpp board/Edge.cpp board/Terrain.cpp
+SOURCES=Test.cpp Board.cpp board/Hexagon.cpp board/Vertex.cpp board/Edge.cpp board/Terrain.cpp
+DEMO_SOURCES=Demo.cpp Board.cpp board/Hexagon.cpp board/Vertex.cpp board/Edge.cpp board/Terrain.cpp Player.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 DEMO_OBJECTS=$(DEMO_SOURCES:.cpp=.o)
 

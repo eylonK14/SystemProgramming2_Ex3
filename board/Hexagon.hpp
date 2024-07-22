@@ -87,6 +87,8 @@ public:
      */
     void setRollNumber(int rollNumber);
 
+    int getRollNumber() const;
+
 private:
     int _q, _r, _rollNumber;
     Terrain _terrain;

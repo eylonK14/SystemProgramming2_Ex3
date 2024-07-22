@@ -99,7 +99,8 @@ public:
      */
     std::string getKeyByIndex(int key)
     {
-        return _translator[key];
+        size_t i = static_cast<size_t>(key);
+        return _translator[i];
     }
 
 private:

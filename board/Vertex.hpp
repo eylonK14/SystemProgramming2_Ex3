@@ -8,7 +8,7 @@
 
 #include <string>
 
-#include "Player.hpp"
+#include "../Player.hpp"
 
 /**
  * @class Vertex
@@ -72,12 +72,22 @@ public:
      */
     std::string toString();
 
+    /**
+     * @brief Gets the player who owns the vertex.
+     *
+     * @return A pointer to the player who owns the vertex.
+     */
     Player *getPlayer();
 
+    /**
+     * @brief Sets the player who owns the vertex.
+     *
+     * @param player A pointer to the player who owns the vertex.
+     */
     void setPlayer(Player *player);
 
 private:
-    int _q, _r, _hasOwner;
-    char _s;
-    Player *_player;
+    int _q, _r, _hasOwner; // The q-coordinate, r-coordinate, and ownership status of the vertex.
+    char _s;               // The symbol associated with the vertex.
+    Player *_player;       // A pointer to the player who owns the vertex.
 };

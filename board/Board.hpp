@@ -19,6 +19,7 @@
 #include "Hexagon.hpp"
 #include "MultiMap.hpp"
 #include "Terrain.hpp"
+#include "../Player.hpp"
 
 #define SIZE 2
 

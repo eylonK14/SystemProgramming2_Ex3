@@ -42,3 +42,8 @@ void Hexagon::setRollNumber(int rollNumber)
 {
     _rollNumber = rollNumber;
 }
+
+int Hexagon::getRollNumber() const
+{
+    return _rollNumber;
+}

@@ -1,6 +1,6 @@
 // Derived class for Resource Cards
 
-#include "Terrain.hpp"
+#include "board/Terrain.hpp"
 #include <iostream>
 #include <stdexcept>
 
